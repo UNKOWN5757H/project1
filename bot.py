@@ -28,9 +28,7 @@ async def approve(_, m: Message):
         )
 
         text = (
-            f"<b>Hello {kk.mention} 👋</b>\n\n"
-            f"✅ Your request to join <b>{op.title}</b> has been approved!\n\n"
-            "ℹ️ Send /start to know more about me."
+            f"<b>Hello {m.from_user.mention 👋🏻, \nYour request to join '{m.chat.title}' has been approved! \nSend /start to know more.</b>"
         )
 
         await app.send_message(
@@ -48,6 +46,7 @@ async def approve(_, m: Message):
         print(f"❌ Error approving {kk.id} in {op.id}: {err}")
 
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Start ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 @app.on_message(filters.private & filters.command("start"))
 async def start(_, m: Message):
     keyboard = InlineKeyboardMarkup(
@@ -58,42 +57,24 @@ async def start(_, m: Message):
 
     add_user(m.from_user.id)
 
-    await m.reply_photo(
-        "https://envs.sh/GXT.jpg",
-        caption=(
-            f"<b>Hi {m.from_user.mention}, I am an Auto Approve Bot. 🤖\n\n"
-            f"I can approve your channel or group join requests instantly. 🚀\n\n"
-            f"🔹 Steps:\n"
-            f"1️⃣ Add me as an administrator to your group or channel.\n"
-            f"2️⃣ I’ll automatically approve join requests!\n\n"
-            f"📜 Disclaimer 👉 /disclaimer\n\n"
-            f"✨ Created By @KR_Picture</b>"
+    await m.reply_text(
+        text=(
+            f"<b>Hi {cb.from_user.mention}, I am a Auto Approve Bot. I can approve your channel or group join requests instantly. \n \nSteps:  \n \nJust add me as an administrator to your group or channel to set me up! \n \nDisclaimer 👉 /disclaimer\n \nCreated By @KR_Picture</b>"
         ),
-        reply_markup=keyboard
+        reply_markup=keyboard,
+        disable_web_page_preview=True
     )
 
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Disclaimer ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 @app.on_message(filters.command("disclaimer"))
 async def disclaimer(_, m: Message):
     text = (
-        "<b>📢 Disclaimer – Auto Approve Join Request Bot</b>\n\n"
-        "🔹 This bot is an automated system that approves join requests in Telegram channels/groups based on predefined rules. "
-        "By using this bot, you acknowledge and agree to the following:\n\n"
-        "✅ <b>No Liability</b>\n"
-        "The bot owner & developers are not responsible for any unauthorized access, spam, or misuse. "
-        "Channel/Group admins must configure settings responsibly.\n\n"
-        "🤖 <b>Automated Decisions</b>\n"
-        "The bot works automatically based on set criteria. It does not verify user intent or guarantee member authenticity.\n\n"
-        "🔧 <b>Admin Responsibility</b>\n"
-        "Channel/Group admins are fully responsible for moderation. "
-        "The bot only accepts requests and does not enforce any additional rules.\n\n"
-        "🚫 <b>No Responsibility for Content</b>\n"
-        "The bot does not control, monitor, or endorse any messages, media, or content posted in the group/channel. "
-        "The channel admins and users are solely responsible for all content shared. "
-        "The bot owner & developers cannot be held accountable for any violations, illegal content, or disputes arising in the channel/group.\n\n"
-        "🔒 <b>Privacy Notice</b>\n"
-        "The bot does not store or share personal data beyond what’s needed for join request processing.\n\n"
-        "📌 Ensure responsible usage to keep your channel/group secure!"
+        """<b>📢 Disclaimer – Auto Approve Join Request Bot\n🔹 This bot is an automated system that approves join requests in Telegram channels/groups based on predefined rules. By using this bot, you acknowledge and agree to the following:\n✅ No Liability
+The bot owner & developers are not responsible for any unauthorized access, spam, or misuse. Channel/Group admins must configure settings responsibly.\n🤖 Automated Decisions
+The bot works automatically based on set criteria. It does not verify user intent or guarantee member authenticity.\n🔧 Admin Responsibility
+Channel/Group admins are fully responsible for moderation. The bot only accepts requests and does not enforce any additional rules.\n🚫 No Responsibility for Content
+The bot does not control, monitor, or endorse any messages, media, or content posted in the group/channel. The channel admins and users are solely responsible for all content shared. The bot owner & developers cannot be held accountable for any violations, illegal content, or disputes arising in the channel/group.\n🔒 Privacy Notice
+The bot does not store or share personal data beyond what’s needed for join request processing.\n📌 Ensure responsible usage to keep your channal/group secure!</b>"""
     )
 
     buttons = InlineKeyboardMarkup(
@@ -103,31 +84,6 @@ async def disclaimer(_, m: Message):
     )
 
     await m.reply_text(text, reply_markup=buttons, disable_web_page_preview=True)
-
-#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Callback ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-@app.on_callback_query(filters.regex("chk"))
-async def chk(_, cb: CallbackQuery):
-    keyboard = InlineKeyboardMarkup(
-        [
-            [InlineKeyboardButton("🎥 Movie Updates Channel 🎥", url="https://t.me/+IiS5lW-OAUU1ZGRl")]
-        ]
-    )
-
-    add_user(cb.from_user.id)
-
-    await cb.message.edit_text(
-        text=(
-            f"<b>Hi {cb.from_user.mention}, I am an Auto Approve Bot. 🤖\n\n"
-            f"I can approve your channel or group join requests instantly.\n\n"
-            f"📌 Steps:\n"
-            f"1️⃣ Add me as an administrator to your group or channel.\n"
-            f"2️⃣ I’ll handle join requests automatically!\n\n"
-            f"📜 Disclaimer 👉 /disclaimer\n\n"
-            f"✨ Created By @KR_Picture</b>"
-        ),
-        reply_markup=keyboard,
-        disable_web_page_preview=True
-    )
 
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Info ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 @app.on_message(filters.command("users") & filters.user(cfg.SUDO))
