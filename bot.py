@@ -28,7 +28,7 @@ async def approve(_, m: Message):
         )
 
         text = (
-            f"<b>Hello {m.from_user.mention 👋🏻, \nYour request to join '{m.chat.title}' has been approved! \nSend /start to know more.</b>"
+            f"<b>Hello {m.from_user.mention} 👋🏻, \nYour request to join '{m.chat.title}' has been approved! \nSend /start to know more.</b>"
         )
 
         await app.send_message(
