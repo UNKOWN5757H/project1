@@ -160,13 +160,23 @@ async def fcast(_, m: Message):
 
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Auto Delete User PM Messages ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 @app.on_message(filters.private & ~filters.service)
-async def auto_delete_user_pm(_, message: Message):
+async def auto_delete_user_media_pm(_, message: Message):
+    # Only delete user messages, not bot messages
     if message.from_user and not message.outgoing:
-        await asyncio.sleep(14400)  # 4 hours
-        try:
-            await message.delete()
-        except:
-            pass
+        # Check if the message is media (document, video, audio, voice, photo, video_note)
+        if (
+            message.document
+            or message.video
+            or message.audio
+            or message.voice
+            or message.photo
+            or message.video_note
+        ):
+            await asyncio.sleep(14400)  # 4 hours
+            try:
+                await message.delete()
+            except:
+                pass
 
 print("I'm Alive Now!")
 app.run()
