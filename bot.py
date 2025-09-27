@@ -23,7 +23,7 @@ async def approve(_, m: Message):
 
         buttons = InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton("🎥 Movie Updates Channel 🎥", url="https://t.me/+yXehY0UBhTkxMTQ1")]
+                [InlineKeyboardButton("🎥 Movie Updates Channel 🎥", url="https://t.me/+flgJs_qUTh81ZTFl")]
             ]
         )
 
@@ -51,7 +51,7 @@ async def approve(_, m: Message):
 async def start(_, m: Message):
     keyboard = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("🎥 Movie Updates Channel 🎥", url="https://t.me/+IiS5lW-OAUU1ZGRl")]
+            [InlineKeyboardButton("📢 Movie Updates Channel 📢", url="https://t.me/+IiS5lW-OAUU1ZGRl")]
         ]
     )
 
