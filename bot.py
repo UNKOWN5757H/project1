@@ -46,7 +46,6 @@ async def approve(_, m: Message):
         print(f"❌ Error approving {kk.id} in {op.id}: {err}")
 
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Start ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 @app.on_message(filters.private & filters.command("start"))
 async def start(_, m: Message):
     keyboard = InlineKeyboardMarkup(
@@ -158,6 +157,16 @@ async def fcast(_, m: Message):
     await lel.edit(
         f"✅Successfull to `{success}` users.\n❌ Failed to `{failed}` users.\n👾 Found `{blocked}` Blocked users\n👻 Found `{deactivated}` Deactivated users."
     )
+
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Auto Delete User PM Messages ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+@app.on_message(filters.private & ~filters.service)
+async def auto_delete_user_pm(_, message: Message):
+    if message.from_user and not message.outgoing:
+        await asyncio.sleep(14400)  # 4 hours
+        try:
+            await message.delete()
+        except:
+            pass
 
 print("I'm Alive Now!")
 app.run()
