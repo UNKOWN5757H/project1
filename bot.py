@@ -59,7 +59,7 @@ async def start(_, m: Message):
 
     await m.reply_text(
         text=(
-            f"<b>Hi {cb.from_user.mention}, I am a Auto Approve Bot. I can approve your channel or group join requests instantly. \n \nSteps:  \n \nJust add me as an administrator to your group or channel to set me up! \n \nDisclaimer 👉 /disclaimer\n \nCreated By @KR_Picture</b>"
+            f"<b>Hi {m.from_user.mention}, I am a Auto Approve Bot. I can approve your channel or group join requests instantly. \n \nSteps:  \n \nJust add me as an administrator to your group or channel to set me up! \n \nDisclaimer 👉 /disclaimer\n \nCreated By @KR_Picture</b>"
         ),
         reply_markup=keyboard,
         disable_web_page_preview=True
